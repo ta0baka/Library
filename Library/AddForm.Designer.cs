@@ -37,6 +37,7 @@
             lAuthor = new Label();
             lYear = new Label();
             btnExit = new Button();
+            btnTest = new Button();
             SuspendLayout();
             // 
             // btnAdd
@@ -142,12 +143,23 @@
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += btnExit_Click;
             // 
+            // btnTest
+            // 
+            btnTest.Location = new Point(12, 364);
+            btnTest.Name = "btnTest";
+            btnTest.Size = new Size(94, 29);
+            btnTest.TabIndex = 9;
+            btnTest.Text = "тест";
+            btnTest.UseVisualStyleBackColor = true;
+            btnTest.Click += btnTest_Click;
+            // 
             // AddForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkSlateGray;
             ClientSize = new Size(544, 405);
+            Controls.Add(btnTest);
             Controls.Add(btnExit);
             Controls.Add(lYear);
             Controls.Add(lAuthor);
@@ -175,5 +187,6 @@
         private Label lAuthor;
         private Label lYear;
         private Button btnExit;
+        private Button btnTest;
     }
 }

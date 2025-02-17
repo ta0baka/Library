@@ -34,30 +34,47 @@ namespace Library
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            var login = tbLogin.Text;
+            int userId;
+            var userLogin = tbLogin.Text;
             var password = tbPassword.Text;
-
+            database.openConnection();
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
             DataTable table = new DataTable();
-
-            string querystring = $@"SELECT login, password FROM users WHERE login = '{login}' AND password = '{password}'";
-
+            string querystring = $@"SELECT id, role FROM users WHERE login ='{userLogin}' and password = '{password}'";
             NpgsqlCommand command = new NpgsqlCommand(querystring, database.getConnection());
-
+            command.Parameters.AddWithValue("login", userLogin);
+            command.Parameters.AddWithValue("password", password);
             adapter.SelectCommand = command;
             adapter.Fill(table);
 
-            if (table.Rows.Count == 1)
+            if (table.Rows.Count > 0)
             {
-                ListOfBooksForm listOfBooksForm = new ListOfBooksForm();
-                this.Hide();
-                listOfBooksForm.Show();
+                string role = table.Rows[0]["role"].ToString();
+                userId = Convert.ToInt32(table.Rows[0]["id"]);
+                switch (role)
+                {
+                    case "user":
+                        ListOfBooksForm listOfBooksForm = new ListOfBooksForm(userLogin);
+                        listOfBooksForm.Show();
+                        this.Hide();
+                        break;
+                    case "admin":
+                        AdminForm adminForm = new AdminForm();
+                        adminForm.Show();
+                        this.Hide();
+                        break;
+                    default:
+                        MessageBox.Show("Ошибка.");
+                        break;
+                }
             }
             else
             {
-                MessageBox.Show("Ошибка при авторизации", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Неверный логин или пароль.");
             }
+            database.closeConnection();
         }
+
         private void llRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             RegistrationForm registrationForm = new RegistrationForm();

@@ -41,10 +41,10 @@ namespace Library
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            var login = tbLogin.Text;
+            var userLogin = tbLogin.Text;
             var password = tbPassword.Text;
 
-            string querystring = $"INSERT INTO users(login, password) VALUES ('{login}', '{password}')";
+            string querystring = $"INSERT INTO users(login, password, role) VALUES ('{userLogin}', '{password}', 'user')";
 
             NpgsqlCommand command = new NpgsqlCommand(querystring, database.getConnection());
 
@@ -53,7 +53,7 @@ namespace Library
             if (command.ExecuteNonQuery() == 1)
             {
                 MessageBox.Show("Аккаунт успешно создан!", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ListOfBooksForm frm3 = new ListOfBooksForm();
+                ListOfBooksForm frm3 = new ListOfBooksForm(userLogin);
                 this.Hide();
                 frm3.ShowDialog();
                 this.Show();

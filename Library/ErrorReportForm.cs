@@ -1,97 +1,44 @@
-﻿using System.Net.Mail;
-using System.Net;
+﻿using Npgsql;
 
 namespace Library
 {
     public partial class ErrorReportForm : Form
     {
-        public ErrorReportForm()
-        {
+        DataBase database = new DataBase();
+        private string userLogin;
 
+        public ErrorReportForm(string login)
+        {
             InitializeComponent();
-            lError.Visible = false;
-            tbReport.Visible = false;
-            btnSendReport.Visible = false;
-            tbPassword.PasswordChar = '•';
-            chbPassword.CheckedChanged += new EventHandler(checkBoxShowPassword_CheckedChanged);
-        }
-
-        private void checkBoxShowPassword_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chbPassword.Checked)
-            {
-                tbPassword.PasswordChar = '\0';
-            }
-            else
-            {
-                tbPassword.PasswordChar = '•';
-            }
+            userLogin = login;
         }
 
         private void btnSendReport_Click(object sender, EventArgs e)
         {
-            string reportText = tbReport.Text;
-            string email = tbEmail.Text;
-            string password = tbPassword.Text;
+            string report = tbReport.Text;
 
-            if (string.IsNullOrWhiteSpace(reportText))
+            string querystring = "INSERT INTO user_reports (login, report, id_status, status, feedback) VALUES (@login, @report, 1, 'Не выполнено', 'Ответа нет')";
+
+            using (NpgsqlCommand command = new NpgsqlCommand(querystring, database.getConnection()))
             {
-                MessageBox.Show("Пожалуйста, введите текст отчета об ошибке.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                database.openConnection();
+                command.Parameters.AddWithValue("login", userLogin);
+                command.Parameters.AddWithValue("report", report);
+                command.ExecuteNonQuery();
             }
 
-            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
-            {
-                MessageBox.Show("Пожалуйста, введите адрес электронной почты и пароль.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                SmtpClient smtpClient = new SmtpClient("smtp.mail.ru")
-                {
-                    Port = 587,
-                    Credentials = new NetworkCredential(email, password),
-                    EnableSsl = true,
-                };
-
-                MailMessage mailMessage = new MailMessage
-                {
-                    From = new MailAddress(email),
-                    Subject = "Отчет об ошибке",
-                    Body = reportText,
-                    IsBodyHtml = false,
-                };
-
-                mailMessage.To.Add("novikova29292828@gmail.com");
-
-                smtpClient.Send(mailMessage);
-                MessageBox.Show("Отчет успешно отправлен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при отправке отчета: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            this.Close();
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            lText.Visible = false;
-            lLogin.Visible = false;
-            lPassword.Visible = false;
-            tbEmail.Visible = false;
-            tbPassword.Visible = false;
-            btnLogin.Visible = false;
-
-            lError.Visible = true;
-            tbReport.Visible = true;
-            btnSendReport.Visible = true;
+            MessageBox.Show("Спасибо за отчет об ошибке!");
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnArchive_Click(object sender, EventArgs e)
+        {
+            ArchiveReportForm archiveReportForm = new ArchiveReportForm();
+            archiveReportForm.Show();
         }
     }
 }

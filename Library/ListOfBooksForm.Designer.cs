@@ -36,10 +36,13 @@
             tbSearch = new TextBox();
             lSearch = new Label();
             linkLabel1 = new LinkLabel();
-            btnPDF = new Button();
             llRate = new LinkLabel();
             btnExit = new Button();
+            cbStatus = new ComboBox();
+            groupBox1 = new GroupBox();
+            btnSave = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // btnImport
@@ -108,6 +111,7 @@
             dgvBooks.RowHeadersWidth = 51;
             dgvBooks.Size = new Size(667, 409);
             dgvBooks.TabIndex = 9;
+            dgvBooks.SortCompare += dgvBooks_SortCompare;
             // 
             // tbSearch
             // 
@@ -146,19 +150,6 @@
             linkLabel1.Text = "Сообщить об ошибке";
             linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
-            // btnPDF
-            // 
-            btnPDF.FlatStyle = FlatStyle.Flat;
-            btnPDF.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            btnPDF.ForeColor = Color.MintCream;
-            btnPDF.Location = new Point(691, 236);
-            btnPDF.Name = "btnPDF";
-            btnPDF.Size = new Size(201, 40);
-            btnPDF.TabIndex = 22;
-            btnPDF.Text = "Открыть в PDF";
-            btnPDF.UseVisualStyleBackColor = true;
-            btnPDF.Click += btnPDF_Click;
-            // 
             // llRate
             // 
             llRate.ActiveLinkColor = Color.MintCream;
@@ -167,10 +158,10 @@
             llRate.LinkColor = Color.MintCream;
             llRate.Location = new Point(18, 491);
             llRate.Name = "llRate";
-            llRate.Size = new Size(188, 21);
+            llRate.Size = new Size(194, 21);
             llRate.TabIndex = 23;
             llRate.TabStop = true;
-            llRate.Text = "Оценить программу";
+            llRate.Text = "Оценить приложение";
             llRate.LinkClicked += llRate_LinkClicked;
             // 
             // btnExit
@@ -186,15 +177,51 @@
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += btnExit_Click;
             // 
+            // cbStatus
+            // 
+            cbStatus.BackColor = Color.DarkSlateGray;
+            cbStatus.ForeColor = Color.MintCream;
+            cbStatus.FormattingEnabled = true;
+            cbStatus.Location = new Point(6, 31);
+            cbStatus.Name = "cbStatus";
+            cbStatus.Size = new Size(189, 31);
+            cbStatus.TabIndex = 26;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(btnSave);
+            groupBox1.Controls.Add(cbStatus);
+            groupBox1.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            groupBox1.ForeColor = Color.MintCream;
+            groupBox1.Location = new Point(691, 262);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(201, 115);
+            groupBox1.TabIndex = 28;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Статус книги";
+            // 
+            // btnSave
+            // 
+            btnSave.FlatStyle = FlatStyle.Flat;
+            btnSave.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            btnSave.ForeColor = Color.MintCream;
+            btnSave.Location = new Point(6, 68);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(189, 40);
+            btnSave.TabIndex = 29;
+            btnSave.Text = "Сохранить";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
+            // 
             // ListOfBooksForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkSlateGray;
             ClientSize = new Size(904, 518);
+            Controls.Add(groupBox1);
             Controls.Add(btnExit);
             Controls.Add(llRate);
-            Controls.Add(btnPDF);
             Controls.Add(linkLabel1);
             Controls.Add(lSearch);
             Controls.Add(tbSearch);
@@ -208,6 +235,7 @@
             Text = "Электронная библиотека - Список книг";
             Load += Form3_Load;
             ((System.ComponentModel.ISupportInitialize)dgvBooks).EndInit();
+            groupBox1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -221,8 +249,10 @@
         private TextBox tbSearch;
         private Label lSearch;
         private LinkLabel linkLabel1;
-        private Button btnPDF;
         private LinkLabel llRate;
         private Button btnExit;
+        private ComboBox cbStatus;
+        private GroupBox groupBox1;
+        private Button btnSave;
     }
 }

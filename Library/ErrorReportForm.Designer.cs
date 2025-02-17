@@ -30,15 +30,10 @@
         {
             tbReport = new TextBox();
             btnSendReport = new Button();
-            tbEmail = new TextBox();
-            tbPassword = new TextBox();
-            lLogin = new Label();
-            lPassword = new Label();
             lText = new Label();
-            btnLogin = new Button();
             lError = new Label();
             btnExit = new Button();
-            chbPassword = new CheckBox();
+            btnArchive = new Button();
             SuspendLayout();
             // 
             // tbReport
@@ -57,57 +52,13 @@
             btnSendReport.FlatStyle = FlatStyle.Flat;
             btnSendReport.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             btnSendReport.ForeColor = Color.MintCream;
-            btnSendReport.Location = new Point(165, 326);
+            btnSendReport.Location = new Point(162, 307);
             btnSendReport.Name = "btnSendReport";
             btnSendReport.Size = new Size(163, 39);
             btnSendReport.TabIndex = 1;
             btnSendReport.Text = "Отправить";
             btnSendReport.UseVisualStyleBackColor = true;
             btnSendReport.Click += btnSendReport_Click;
-            // 
-            // tbEmail
-            // 
-            tbEmail.BackColor = Color.DarkSlateGray;
-            tbEmail.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbEmail.ForeColor = Color.MintCream;
-            tbEmail.Location = new Point(119, 126);
-            tbEmail.Multiline = true;
-            tbEmail.Name = "tbEmail";
-            tbEmail.Size = new Size(362, 27);
-            tbEmail.TabIndex = 2;
-            // 
-            // tbPassword
-            // 
-            tbPassword.BackColor = Color.DarkSlateGray;
-            tbPassword.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbPassword.ForeColor = Color.MintCream;
-            tbPassword.Location = new Point(119, 182);
-            tbPassword.Multiline = true;
-            tbPassword.Name = "tbPassword";
-            tbPassword.Size = new Size(362, 27);
-            tbPassword.TabIndex = 3;
-            // 
-            // lLogin
-            // 
-            lLogin.AutoSize = true;
-            lLogin.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            lLogin.ForeColor = Color.MintCream;
-            lLogin.Location = new Point(46, 130);
-            lLogin.Name = "lLogin";
-            lLogin.Size = new Size(67, 23);
-            lLogin.TabIndex = 4;
-            lLogin.Text = "Логин";
-            // 
-            // lPassword
-            // 
-            lPassword.AutoSize = true;
-            lPassword.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            lPassword.ForeColor = Color.MintCream;
-            lPassword.Location = new Point(28, 185);
-            lPassword.Name = "lPassword";
-            lPassword.Size = new Size(85, 23);
-            lPassword.TabIndex = 5;
-            lPassword.Text = "Пароль";
             // 
             // lText
             // 
@@ -119,19 +70,6 @@
             lText.Size = new Size(399, 80);
             lText.TabIndex = 6;
             lText.Text = "Войдите в свою почту\r\n для отправки отчета\r\n";
-            // 
-            // btnLogin
-            // 
-            btnLogin.FlatStyle = FlatStyle.Flat;
-            btnLogin.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            btnLogin.ForeColor = Color.MintCream;
-            btnLogin.Location = new Point(181, 251);
-            btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(163, 39);
-            btnLogin.TabIndex = 7;
-            btnLogin.Text = "Войти";
-            btnLogin.UseVisualStyleBackColor = true;
-            btnLogin.Click += btnLogin_Click;
             // 
             // lError
             // 
@@ -158,17 +96,18 @@
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += btnExit_Click;
             // 
-            // chbPassword
+            // btnArchive
             // 
-            chbPassword.AutoSize = true;
-            chbPassword.Font = new Font("Century Gothic", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            chbPassword.ForeColor = Color.MintCream;
-            chbPassword.Location = new Point(119, 215);
-            chbPassword.Name = "chbPassword";
-            chbPassword.Size = new Size(177, 25);
-            chbPassword.TabIndex = 10;
-            chbPassword.Text = "Показать пароль";
-            chbPassword.UseVisualStyleBackColor = true;
+            btnArchive.FlatStyle = FlatStyle.Flat;
+            btnArchive.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            btnArchive.ForeColor = Color.MintCream;
+            btnArchive.Location = new Point(12, 350);
+            btnArchive.Name = "btnArchive";
+            btnArchive.Size = new Size(94, 34);
+            btnArchive.TabIndex = 10;
+            btnArchive.Text = "Архив";
+            btnArchive.UseVisualStyleBackColor = true;
+            btnArchive.Click += btnArchive_Click;
             // 
             // ErrorReportForm
             // 
@@ -176,15 +115,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkSlateGray;
             ClientSize = new Size(515, 396);
-            Controls.Add(chbPassword);
+            Controls.Add(btnArchive);
             Controls.Add(btnExit);
             Controls.Add(lError);
-            Controls.Add(btnLogin);
             Controls.Add(lText);
-            Controls.Add(lPassword);
-            Controls.Add(lLogin);
-            Controls.Add(tbPassword);
-            Controls.Add(tbEmail);
             Controls.Add(btnSendReport);
             Controls.Add(tbReport);
             Name = "ErrorReportForm";
@@ -198,14 +132,9 @@
 
         private TextBox tbReport;
         private Button btnSendReport;
-        private TextBox tbEmail;
-        private TextBox tbPassword;
-        private Label lLogin;
-        private Label lPassword;
         private Label lText;
-        private Button btnLogin;
         private Label lError;
         private Button btnExit;
-        private CheckBox chbPassword;
+        private Button btnArchive;
     }
 }
